@@ -74,7 +74,7 @@ public class Jobtitel  implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Jobtitel [id=" + id + ", naam=" + naam + ", versie=" + versie + "]";
+		return naam;
 	}
 	
 	

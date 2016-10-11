@@ -157,9 +157,7 @@ public class Werknemer implements Serializable, Comparable<Werknemer> {
 	
 	@Override
 	public String toString() {
-		return "Werknemer [id=" + id + ", familienaam=" + familienaam + ", voornaam=" + voornaam + ", email=" + email
-				+ ", chef=" + chef + ", ondergeschikten=" + ondergeschikten + ", jobtitel=" + jobtitel + ", salaris="
-				+ salaris + ", versie=" + versie + "]";
+		return voornaam + " " + familienaam;
 	}
 
 	// alfabetische rangschikking van de werkenemers in Set ondergeschikten op

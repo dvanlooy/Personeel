@@ -6,4 +6,6 @@ import be.vdab.entities.Werknemer;
 
 public interface WerknemerRepository extends JpaRepository<Werknemer, Long> {
 
+	Werknemer findByChefIsNull();
+	
 }
