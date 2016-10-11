@@ -60,10 +60,8 @@ public class WerknemerController {
 
 	@PostMapping("/opslag/{werknemer}")
 	ModelAndView opslag(@PathVariable Werknemer werknemer, @Validated OpslagForm opslag, BindingResult bindingResult) {
-		ModelAndView modelAndView;
 		if (bindingResult.hasErrors()) {
-			modelAndView = new ModelAndView(OPSLAG_VIEW);
-			return modelAndView;
+			return new ModelAndView(OPSLAG_VIEW);
 		}
 		werknemerService.opslag(werknemer, opslag.getBedrag());
 		return new ModelAndView(WERKNEMER_VIEW, "werknemer", werknemer);
