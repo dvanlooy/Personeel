@@ -28,8 +28,8 @@ public class WerknemerController {
 	WerknemerController(WerknemerService werknemerService) {
 		this.werknemerService = werknemerService;
 	}
-	
-	//DATABINDER
+
+	// DATABINDER
 	@InitBinder("werknemer")
 	void initBinderFiliaal(WebDataBinder binder) {
 		binder.initDirectFieldAccess();
@@ -50,25 +50,23 @@ public class WerknemerController {
 		return modelAndView;
 	}
 
-	 @GetMapping("/opslag/{werknemer}")
-	 ModelAndView updateForm(@PathVariable Werknemer werknemer) {
-	 if (werknemer == null) {
-	 return new ModelAndView(WERKNEMER_VIEW);
-	 }
-	 return new ModelAndView(OPSLAG_VIEW)
-			 .addObject("werknemer", werknemer)
-			 .addObject(new OpslagForm());
-	 }
-	 
-	 @PostMapping("/opslag/{werknemer}")
-	 ModelAndView opslag(@PathVariable Werknemer werknemer,@Validated OpslagForm opslag, BindingResult bindingResult) {
-		 ModelAndView modelAndView;
-			if (bindingResult.hasErrors()) {
-				modelAndView = new ModelAndView(OPSLAG_VIEW);
-				return modelAndView;
-			}
-			werknemerService.opslag(werknemer, opslag.getBedrag() );
-			return new ModelAndView(WERKNEMER_VIEW, "werknemer", werknemer);
+	@GetMapping("/opslag/{werknemer}")
+	ModelAndView updateForm(@PathVariable Werknemer werknemer) {
+		if (werknemer == null) {
+			return new ModelAndView(WERKNEMER_VIEW);
 		}
+		return new ModelAndView(OPSLAG_VIEW).addObject("werknemer", werknemer).addObject(new OpslagForm());
+	}
+
+	@PostMapping("/opslag/{werknemer}")
+	ModelAndView opslag(@PathVariable Werknemer werknemer, @Validated OpslagForm opslag, BindingResult bindingResult) {
+		ModelAndView modelAndView;
+		if (bindingResult.hasErrors()) {
+			modelAndView = new ModelAndView(OPSLAG_VIEW);
+			return modelAndView;
+		}
+		werknemerService.opslag(werknemer, opslag.getBedrag());
+		return new ModelAndView(WERKNEMER_VIEW, "werknemer", werknemer);
+	}
 
 }
