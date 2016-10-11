@@ -1,8 +1,13 @@
 package be.vdab.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,6 +27,12 @@ public class WerknemerController {
 	// CONSTRUCTOR
 	WerknemerController(WerknemerService werknemerService) {
 		this.werknemerService = werknemerService;
+	}
+	
+	//DATABINDER
+	@InitBinder("werknemer")
+	void initBinderFiliaal(WebDataBinder binder) {
+		binder.initDirectFieldAccess();
 	}
 
 	// MAPPINGS
@@ -48,5 +59,16 @@ public class WerknemerController {
 			 .addObject("werknemer", werknemer)
 			 .addObject(new OpslagForm());
 	 }
+	 
+	 @PostMapping("/opslag/{werknemer}")
+	 ModelAndView opslag(@PathVariable Werknemer werknemer,@Validated OpslagForm opslag, BindingResult bindingResult) {
+		 ModelAndView modelAndView;
+			if (bindingResult.hasErrors()) {
+				modelAndView = new ModelAndView(OPSLAG_VIEW);
+				return modelAndView;
+			}
+			werknemerService.opslag(werknemer, opslag.getBedrag() );
+			return new ModelAndView(WERKNEMER_VIEW, "werknemer", werknemer);
+		}
 
 }

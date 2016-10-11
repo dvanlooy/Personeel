@@ -20,13 +20,14 @@
 				<form:form commandName='opslagForm'>
 					<div class="input-group" style="width: 400px">
 						<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></span>
-						<form:input path='bedrag' required='required' min='1'
-							class="form-control" placeholder="geef een bedrag in" />
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button"><span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
-						</span>
+						<form:input path='bedrag' class="form-control" placeholder="geef een bedrag in" />
+						
+						<div class="input-group-btn">
+						<spring:url value="${werknemer.id}" var="urlOpslag" />
+						<form:errors path='bedrag' delimiter=', ' class="btn btn-danger" onclick="location.href='${urlOpslag}'"/>
+						<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+						</div>
 					</div>
-					<form:errors path='bedrag' delimiter=', ' />
 				</form:form>
 			</div>
 		</div>
