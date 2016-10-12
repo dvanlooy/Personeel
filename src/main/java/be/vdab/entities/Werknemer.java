@@ -2,8 +2,8 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -83,10 +83,10 @@ public class Werknemer implements Serializable, Comparable<Werknemer> {
 		this.email = email;
 		this.jobtitel = jobtitel;
 		this.salaris = salaris;
-		ondergeschikten = new HashSet<>();
+		ondergeschikten = new TreeSet<>();
 	}
 
-	// GETTERS (& SETTERS)
+	// GETTERS
 	public long getId() {
 		return id;
 	}
@@ -107,10 +107,6 @@ public class Werknemer implements Serializable, Comparable<Werknemer> {
 		return chef;
 	}
 
-	public void setChef(Werknemer chef) {
-		this.chef = chef;
-	}
-
 	public Set<Werknemer> getOndergeschikten() {
 		return ondergeschikten;
 	}
@@ -119,19 +115,17 @@ public class Werknemer implements Serializable, Comparable<Werknemer> {
 		return jobtitel;
 	}
 
-	public void setJobtitel(Jobtitel jobtitel) {
-		this.jobtitel = jobtitel;
-	}
-
 	public BigDecimal getSalaris() {
 		return salaris;
 	}
 
-	public void setSalaris(BigDecimal salaris) {
-		this.salaris = salaris;
+	//PUBLIC METHODS
+	public void opslag(BigDecimal salaris) {
+		this.salaris = this.salaris.add(salaris);
 	}
-
+	
 	// OVERRIDE METHODS
+	//email is UNIQUE KEY
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -139,7 +133,7 @@ public class Werknemer implements Serializable, Comparable<Werknemer> {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		return result;
 	}
-
+	//email is UNIQUE KEY
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -160,8 +154,8 @@ public class Werknemer implements Serializable, Comparable<Werknemer> {
 		return voornaam + " " + familienaam;
 	}
 
-	// alfabetische rangschikking van de werkenemers in Set ondergeschikten op
-	// familienaam > voornaam
+	// alfabetische rangschikking van de werknemers in Set ondergeschikten op
+	// familienaam > voornaam  --> werkt alleen niet :-(
 	@Override
 	public int compareTo(Werknemer o) {
 		if (this.familienaam == o.familienaam) {

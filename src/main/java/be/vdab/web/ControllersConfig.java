@@ -48,27 +48,14 @@ public class ControllersConfig extends WebMvcConfigurerAdapter {
 		return new SpringValidatorAdapter(validatorFactory().getValidator());
 	}
 
-//	@Bean
-//	LocaleResolver localeResolver() {
-//		CookieLocaleResolver resolver = new CookieLocaleResolver();
-//		resolver.setCookieMaxAge(604800);
-//		return resolver;
-//	}
-
-//	@Override
-//	public void addInterceptors(InterceptorRegistry registry) {
-//		registry.addInterceptor(new LocaleChangeInterceptor());
-//	}
-
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/images/**").addResourceLocations("/images/");
-		registry.addResourceHandler("/styles/**").addResourceLocations("/styles/");
-		registry.addResourceHandler("/scripts/**").addResourceLocations("/scripts/");
 	}
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/info").setViewName("info");
+		
 	}
 }

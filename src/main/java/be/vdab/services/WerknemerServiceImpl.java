@@ -23,6 +23,9 @@ public class WerknemerServiceImpl implements WerknemerService {
 		return werknemerRepository.findOne(id);
 	}
 
+	/**
+	 * geeft werknemer terug met chefid = null
+	 */
 	@Override
 	public Werknemer zoekHoogsteInRang() {
 		return werknemerRepository.findByChefIsNull();
@@ -34,11 +37,14 @@ public class WerknemerServiceImpl implements WerknemerService {
 	@Override
 	@ModifyingTransactionalServiceMethod
 	public void opslag(Werknemer werknemer, BigDecimal bedrag) {
-		werknemer.setSalaris(werknemer.getSalaris().add(bedrag));
+		werknemer.opslag(bedrag);
 		werknemerRepository.save(werknemer);
 
 	}
 
+	/**
+	 * geeft pageable object terug met werknemers met bepaald jobtitel
+	 */
 	@Override
 	public Page<Werknemer> findByJobtitel(Jobtitel jobtitel, Pageable pageable) {
 		return werknemerRepository.findByJobtitel(jobtitel, pageable);

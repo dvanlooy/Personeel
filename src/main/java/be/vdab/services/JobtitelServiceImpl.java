@@ -21,6 +21,7 @@ public class JobtitelServiceImpl implements JobtitelService {
 		return jobtitelRepository.findOne(id);
 	}
 
+
 	@Override
 	public List<Jobtitel> findAll() {
 		return jobtitelRepository.findAll(new Sort("id"));

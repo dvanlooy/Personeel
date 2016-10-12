@@ -20,6 +20,7 @@ public class WerknemerController {
 
 	// VIEWS
 	private static final String WERKNEMER_VIEW = "werknemers/werknemer";
+	private static final String REDIRECT_URL_WERKNEMER_NIET_GEVONDEN = "redirect:/werknemers";
 	private static final String OPSLAG_VIEW = "werknemers/opslag";
 	private static final String REDIRECT_NA_OPSLAG = "redirect:/werknemers/{werknemer}";
 
@@ -54,9 +55,11 @@ public class WerknemerController {
 	@GetMapping("/opslag/{werknemer}")
 	ModelAndView updateForm(@PathVariable Werknemer werknemer) {
 		if (werknemer == null) {
-			return new ModelAndView(WERKNEMER_VIEW);
+			return new ModelAndView(REDIRECT_URL_WERKNEMER_NIET_GEVONDEN);
 		}
-		return new ModelAndView(OPSLAG_VIEW).addObject("werknemer", werknemer).addObject(new OpslagForm());
+		return new ModelAndView(OPSLAG_VIEW)
+				.addObject("werknemer", werknemer)
+				.addObject(new OpslagForm());
 	}
 
 	@PostMapping("/opslag/{werknemer}")
