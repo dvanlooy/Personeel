@@ -14,8 +14,6 @@ public class OpslagForm {
 	public BigDecimal getBedrag() {
 		return bedrag;
 	}
+	
 
-	public void setBedrag(BigDecimal bedrag) {
-		this.bedrag = bedrag;
-	}
 }

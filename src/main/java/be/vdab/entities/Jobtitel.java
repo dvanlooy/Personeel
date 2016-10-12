@@ -46,6 +46,10 @@ public class Jobtitel  implements Serializable {
 	public String getNaam() {
 		return naam;
 	}
+	
+	public long getVersie() {
+		return versie;
+	}
 
 	
 	//OVERRIDE METHODS

@@ -32,7 +32,7 @@ public class WerknemerController {
 	}
 
 	// DATABINDER
-	@InitBinder("werknemer")
+	@InitBinder("opslagForm")
 	void initBinderFiliaal(WebDataBinder binder) {
 		binder.initDirectFieldAccess();
 	}
@@ -51,9 +51,9 @@ public class WerknemerController {
 		}
 		return modelAndView;
 	}
-
+	//opslagformulier tonen
 	@GetMapping("/opslag/{werknemer}")
-	ModelAndView updateForm(@PathVariable Werknemer werknemer) {
+	ModelAndView opslagForm(@PathVariable Werknemer werknemer) {
 		if (werknemer == null) {
 			return new ModelAndView(REDIRECT_URL_WERKNEMER_NIET_GEVONDEN);
 		}
@@ -61,18 +61,15 @@ public class WerknemerController {
 				.addObject("werknemer", werknemer)
 				.addObject(new OpslagForm());
 	}
-
+	//opslag verwerken
 	@PostMapping("/opslag/{werknemer}")
 	ModelAndView opslag(@PathVariable Werknemer werknemer, @Validated OpslagForm opslag, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView(OPSLAG_VIEW);
 		}
-
 		werknemerService.opslag(werknemer, opslag.getBedrag());
 		ModelAndView modelAndView = new ModelAndView(REDIRECT_NA_OPSLAG);
 		modelAndView.addObject("bedrag", opslag.getBedrag());
 		return modelAndView;
-
 	}
-
 }

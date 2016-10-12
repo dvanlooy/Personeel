@@ -118,6 +118,10 @@ public class Werknemer implements Serializable, Comparable<Werknemer> {
 	public BigDecimal getSalaris() {
 		return salaris;
 	}
+	
+	public long getVersie() {
+		return versie;
+	}
 
 	//PUBLIC METHODS
 	public void opslag(BigDecimal salaris) {

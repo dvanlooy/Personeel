@@ -3,6 +3,7 @@
 <%@taglib prefix='v' uri='http://vdab.be/tags'%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
 <!doctype html>
 <html lang='nl'>
 <head>
@@ -16,7 +17,7 @@
 				<h1>Opslag voor ${werknemer}</h1>
 			</div>
 			<div class="panel-body">
-			<div class="well well-sm" style="width: 400px">Huidig salaris: <strong>${werknemer.salaris}</strong></div>
+			<div class="well well-sm" style="width: 400px">Huidig salaris: <strong><fmt:formatNumber type="number" pattern="#,###.##" value="${werknemer.salaris}" /></strong></div>
 				<form:form commandName='opslagForm'>
 					<div class="input-group" style="width: 400px">
 						<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></span>
