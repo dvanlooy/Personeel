@@ -10,27 +10,37 @@
 <v:head title='Opslag' />
 </head>
 <body>
-	<v:menu title='Opslag' subtitle=''/>
+	<v:menu title='Opslag' subtitle='' />
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h1>Opslag voor ${werknemer}</h1>
 			</div>
 			<div class="panel-body">
-			<div class="well well-sm" style="width: 400px">Huidig salaris: <strong><fmt:formatNumber type="number" pattern="#,###.##" value="${werknemer.salaris}" /></strong></div>
+				<div class="well well-sm" style="width: 400px">
+					Huidig salaris: <strong><fmt:formatNumber type="number"
+							pattern="#,###.##" value="${werknemer.salaris}" /></strong>
+				</div>
 				<form:form commandName='opslagForm'>
 					<div class="input-group" style="width: 400px">
-						<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></span>
-						<form:input path='bedrag' class="form-control" placeholder="geef een bedrag in" />
-						
+						<span class="input-group-addon" id="basic-addon1"><span
+							class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></span>
+						<form:input path='bedrag' class="form-control"
+							placeholder="geef een bedrag in" />
+
 						<div class="input-group-btn">
-						<spring:url value="${werknemer.id}" var="urlOpslag" />
-						<form:errors path='bedrag' delimiter=', ' class="btn btn-danger" onclick="location.href='${urlOpslag}'"/>
-						<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+							<spring:url value="${werknemer.id}" var="urlOpslag" />
+							<form:errors path='bedrag' delimiter=', ' class="btn btn-danger"
+								onclick="location.href='${urlOpslag}'" />
+							<button class="btn btn-default" type="submit">
+								<span class="glyphicon glyphicon glyphicon-chevron-right"
+									aria-hidden="true"></span>
+							</button>
 						</div>
 					</div>
 				</form:form>
 			</div>
 		</div>
+	</div>
 </body>
 </html>
