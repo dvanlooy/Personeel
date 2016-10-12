@@ -46,22 +46,24 @@ public class WerknemerController {
 	@GetMapping("{werknemer}")
 	ModelAndView read(@PathVariable Werknemer werknemer) {
 		ModelAndView modelAndView = new ModelAndView(WERKNEMER_VIEW);
-		if (werknemer != null) {
+		if (werknemer == null) {
+			return new ModelAndView(REDIRECT_URL_WERKNEMER_NIET_GEVONDEN);
+		} else {
 			modelAndView.addObject(werknemer);
 		}
 		return modelAndView;
 	}
-	//opslagformulier tonen
+
+	// opslagformulier tonen
 	@GetMapping("/opslag/{werknemer}")
 	ModelAndView opslagForm(@PathVariable Werknemer werknemer) {
 		if (werknemer == null) {
 			return new ModelAndView(REDIRECT_URL_WERKNEMER_NIET_GEVONDEN);
 		}
-		return new ModelAndView(OPSLAG_VIEW)
-				.addObject("werknemer", werknemer)
-				.addObject(new OpslagForm());
+		return new ModelAndView(OPSLAG_VIEW).addObject("werknemer", werknemer).addObject(new OpslagForm());
 	}
-	//opslag verwerken
+
+	// opslag verwerken
 	@PostMapping("/opslag/{werknemer}")
 	ModelAndView opslag(@PathVariable Werknemer werknemer, @Validated OpslagForm opslag, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
