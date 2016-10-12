@@ -8,7 +8,7 @@
 
 </head>
 <body>
-	<v:menu />
+	<v:menu title='Personeel' subtitle='een SPRING applicatie'/>
 	<div class="container">
 		<div class="jumbotron">
 			<h1>Welkom bij Personeel</h1>

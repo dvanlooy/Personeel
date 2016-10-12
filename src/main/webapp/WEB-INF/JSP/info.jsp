@@ -8,7 +8,7 @@
 
 </head>
 <body>
-	<v:menu />
+	<v:menu title='Info' subtitle='over de applicatie'/>
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading">

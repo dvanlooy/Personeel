@@ -1,5 +1,6 @@
 package be.vdab.web;
 
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -21,6 +22,8 @@ public class WerknemerController {
 	// VIEWS
 	private static final String WERKNEMER_VIEW = "werknemers/werknemer";
 	private static final String OPSLAG_VIEW = "werknemers/opslag";
+	private static final String REDIRECT_NA_OPSLAG = "redirect:/werknemers/{werknemer}";
+	private static final String REDIRECT_URL_NA_LOCKING_EXCEPTION = "redirect:/werknemers/{werknemer}?optimisticlockingexception=true";
 
 	private final WerknemerService werknemerService;
 
@@ -63,8 +66,12 @@ public class WerknemerController {
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView(OPSLAG_VIEW);
 		}
+
 		werknemerService.opslag(werknemer, opslag.getBedrag());
-		return new ModelAndView(WERKNEMER_VIEW, "werknemer", werknemer);
+		ModelAndView modelAndView = new ModelAndView(REDIRECT_NA_OPSLAG);
+		modelAndView.addObject("bedrag", opslag.getBedrag());
+		return modelAndView;
+
 	}
 
 }

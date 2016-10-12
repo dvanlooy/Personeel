@@ -1,5 +1,6 @@
 <%@page contentType='text/html' pageEncoding='UTF-8' session='false'%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+<%@taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
 <%@taglib prefix='v' uri='http://vdab.be/tags'%>
 <!doctype html>
 <html lang='nl'>
@@ -7,7 +8,7 @@
 <v:head title='${werknemer.voornaam} ${werknemer.familienaam}' />
 </head>
 <body>
-	<v:menu />
+	<v:menu title='Werknemer' subtitle='${werknemer.voornaam} ${werknemer.familienaam}'/>
 	<div class="container">
 		<div class="well">
 			<div class="row">
@@ -44,7 +45,15 @@
 						<div class="col-xs-6 col-md-4">
 							<strong>Salaris:</strong>
 						</div>
-						<div class="col-xs-12 col-sm-6 col-md-8">${werknemer.salaris}</div>
+						<div class="col-xs-12 col-sm-6 col-md-8">
+							<fmt:formatNumber type="number" pattern="#,###.##"
+								value="${werknemer.salaris}" />
+							<c:if test="${not empty param.bedrag }">
+								<span class="badge">+&nbsp;<fmt:formatNumber
+										type="number" pattern="#,###.##" value="${param.bedrag }" />&nbsp;&euro;
+								</span>
+							</c:if>
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-xs-6 col-md-4">
@@ -66,7 +75,6 @@
 
 				</div>
 			</div>
-
 		</div>
 		<c:if test="${not empty werknemer.ondergeschikten}">
 			<div class="list-group">
@@ -79,8 +87,9 @@
 			</div>
 		</c:if>
 		<div class="text-center">
-		<c:url value="/werknemers/opslag/${werknemer.id}"	var="urlOpslag" />
+			<c:url value="/werknemers/opslag/${werknemer.id}" var="urlOpslag" />
 			<a class="btn btn-primary" href="${urlOpslag}" role="button">Opslag</a>
 		</div>
+	</div>
 </body>
 </html>

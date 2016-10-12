@@ -9,7 +9,7 @@
 <v:head title='Opslag' />
 </head>
 <body>
-	<v:menu />
+	<v:menu title='Opslag' subtitle=''/>
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading">
